@@ -1,0 +1,41 @@
+{
+    "name": "aaronneondigital/headlesslivewire",
+    "description": "Headless UI for Livewire v3",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aaron Lawrence",
+            "email": "aaron@neondigital.co.uk",
+            "homepage": "http://author.com"
+        }
+    ],
+    "homepage": "https://github.com/aaronneondigital/headlesslivewire",
+    "keywords": ["Laravel", "HeadlessLivewire"],
+    "require": {
+        "illuminate/support": "~9"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~7"
+    },
+    "autoload": {
+        "psr-4": {
+            "AaronNeonDigital\\HeadlessLivewire\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AaronNeonDigital\\HeadlessLivewire\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AaronNeonDigital\\HeadlessLivewire\\HeadlessLivewireServiceProvider"
+            ],
+            "aliases": {
+                "HeadlessLivewire": "AaronNeonDigital\\HeadlessLivewire\\Facades\\HeadlessLivewire"
+            }
+        }
+    }
+}
