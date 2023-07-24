@@ -2,7 +2,9 @@
 
 namespace AaronNeonDigital\HeadlessLivewire;
 
+use AaronNeonDigital\HeadlessLivewire\Livewire\Input;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class HeadlessLivewireServiceProvider extends ServiceProvider
 {
@@ -13,15 +15,19 @@ class HeadlessLivewireServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'aaronneondigital');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'aaronneondigital');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'headless-livewire');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+
+        $this->registerLivewireComponents();
+    }
+
+    protected function registerLivewireComponents(): void
+    {
+        Livewire::component('input', Input::class);
     }
 
     /**
@@ -44,7 +50,7 @@ class HeadlessLivewireServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return ['headlesslivewire'];
     }
@@ -60,23 +66,5 @@ class HeadlessLivewireServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/headlesslivewire.php' => config_path('headlesslivewire.php'),
         ], 'headlesslivewire.config');
-
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/aaronneondigital'),
-        ], 'headlesslivewire.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/aaronneondigital'),
-        ], 'headlesslivewire.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/aaronneondigital'),
-        ], 'headlesslivewire.views');*/
-
-        // Registering package commands.
-        // $this->commands([]);
     }
 }
